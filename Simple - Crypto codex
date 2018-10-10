@@ -1,0 +1,58 @@
+
+
+#Caesar cipher
+'''
+Caesar shift is known for Caesar cipher is best known with a shift of 3, all other shifts are possible.
+Some shifts are known with other cipher names.
+'''
+
+def caesar(shift, secretMessage):
+
+    alphabetList = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+                    'u', 'v', 'w', 'x', 'y', 'z']
+
+    limit = len(alphabetList)-1
+
+    result = ""
+
+    #shift = 1
+
+    for word in secretMessage:
+        letters = list(word)
+        for item in letters:
+            shiftedindex = alphabetList.index(item) + shift
+
+            #ensure index is always between 0 and 25
+            if (shiftedindex >= limit):
+                shiftedindex = (shiftedindex - limit)-1
+
+            decodedLetter = alphabetList[shiftedindex]
+            result = result + decodedLetter
+        result = result + " "
+
+    #print(result)
+    return result
+
+####################################################################################
+def bruteforce(text1):
+
+    counter = 1
+
+    while (counter < 26):
+        message = caesar(counter, text1)
+        print("Shift " + str(counter) + ": " + message)
+        counter = counter + 1
+
+####################################################################################
+
+def enterMessage():
+    secretMessage = ((input("Enter secret message:")).lower()).split()
+    return secretMessage
+
+####################################################################################
+
+message = enterMessage()
+bruteforce(message)
+key = int(input("\nEnter shift value: "))
+decodedMessage = caesar(key, message)
+print("\nDecoded message: " + decodedMessage)
