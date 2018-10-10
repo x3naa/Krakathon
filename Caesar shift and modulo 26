@@ -1,0 +1,30 @@
+'''
+CA
+Another way to de crypt, more mathematical, note A=0, B=1, ..., Z=25, subtracts a constant (the shift), then the result modulo 26 (alphabet length) is the plain text.
+
+Example: Take G=6, subtract the shift 6-3=3 and 3=D, so G is decrypted with D
+Take A=0, 0-3=-3 and -3 mod 26 = 23, 23=X, so A is decrypted with X, etc.
+
+GFRGHA is decrypted DCODEX
+'''
+
+
+secretMessage = (input("Enter secret message: ").lower()).split()
+
+alphabetList = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+                    'u', 'v', 'w', 'x', 'y', 'z']
+shift = 1
+result = ""
+
+while (shift < 26):
+    for word in secretMessage:
+        letters = list(word)
+        for item in letters:
+            shiftedindex = (alphabetList.index(item) - shift) % 26
+            decodedLetter = alphabetList[shiftedindex]
+            result = result + decodedLetter
+        result = result + " "
+
+    print("Shift " + str(shift) + " modulo 26: " + result)
+    shift = shift + 1
+    result = ""
